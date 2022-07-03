@@ -1,5 +1,6 @@
 {
-  "variants": {
-    "": { "model": "gepardiusmod:block/netherrack_gepardie_ore" }
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "gepardiusmod:block/netherrack_gepardie_ore"
   }
 }
