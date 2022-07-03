@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "gepardiusmod:block/endstone_gepardie_ore"
+  }
+}

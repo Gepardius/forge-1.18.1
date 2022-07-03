@@ -29,6 +29,29 @@ public class ModBlocks {
                     .strength(5f)
                     .requiresCorrectToolForDrops()), CreativeModeTab.TAB_MISC);
 
+    public static final RegistryObject<Block> GEPARDIE_ORE = registerBlock("gepardie_ore",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(6f)
+                    .requiresCorrectToolForDrops()), CreativeModeTab.TAB_MISC);
+
+    public static final RegistryObject<Block> DEEPSLATE_GEPARDIE_ORE = registerBlock("deepslate_gepardie_ore",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(6f)
+                    .requiresCorrectToolForDrops()), CreativeModeTab.TAB_MISC);
+
+    public static final RegistryObject<Block> ENDSTONE_GEPARDIE_ORE = registerBlock("endstone_gepardie_ore",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(6f)
+                    .requiresCorrectToolForDrops()), CreativeModeTab.TAB_MISC);
+
+    public static final RegistryObject<Block> NETHERRACK_GEPARDIE_ORE = registerBlock("netherrack_gepardie_ore",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(6f)
+                    .requiresCorrectToolForDrops()), CreativeModeTab.TAB_MISC);
+
+
+
+
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn, tab);
