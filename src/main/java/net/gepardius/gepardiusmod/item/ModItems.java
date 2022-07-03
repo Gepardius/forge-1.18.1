@@ -15,7 +15,8 @@ public class ModItems {
     public static final RegistryObject<Item> GEPARDIE = ITEMS.register("gepardie",
             () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
-
+    public static final RegistryObject<Item> RAW_GEPARDIE = ITEMS.register("raw_gepardie",
+            () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

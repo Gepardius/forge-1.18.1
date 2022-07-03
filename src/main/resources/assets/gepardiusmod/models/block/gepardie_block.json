@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "gepardiusmod:block/gepardie_block"
+  }
+}

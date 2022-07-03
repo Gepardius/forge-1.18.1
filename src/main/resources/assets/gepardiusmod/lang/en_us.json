@@ -1,3 +1,6 @@
 {
-  "item.gepardiusmod.gepardie": "Gepardie"
+  "item.gepardiusmod.gepardie": "Gepardie",
+  "item.gepardiusmod.raw_gepardie": "Raw gepardie",
+  "block.gepardiusmod.gepardie_block": "Gepardie block",
+  "block.gepardiusmod.raw_gepardie_block": "Raw gepardie block"
 }

@@ -1,5 +1,6 @@
 package net.gepardius.gepardiusmod;
 
+import net.gepardius.gepardiusmod.block.ModBlocks;
 import net.gepardius.gepardiusmod.item.ModItems;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -33,6 +34,9 @@ public class GepardiusMod {
 
         // registering mod items into our register
         ModItems.register(eventBus);
+        // registering mod blocks into our register
+        ModBlocks.register(eventBus);
+
         eventBus.addListener(this::setup);
 
         // Register ourselves for server and other game events we are interested in
