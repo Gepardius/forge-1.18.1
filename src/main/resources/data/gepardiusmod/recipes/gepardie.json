@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "gepardiusmod:gepardie_block"
+    }
+  ],
+  "result": {
+    "item": "gepardiusmod:gepardie",
+    "count": 9
+  }
+}

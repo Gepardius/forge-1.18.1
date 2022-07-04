@@ -1,10 +1,12 @@
 {
   "item.gepardiusmod.gepardie": "Gepardie",
-  "item.gepardiusmod.raw_gepardie": "Raw gepardie",
+  "item.gepardiusmod.raw_gepardie": "Raw Gepardie",
   "block.gepardiusmod.gepardie_block": "Gepardie block",
-  "block.gepardiusmod.raw_gepardie_block": "Raw gepardie block",
+  "block.gepardiusmod.raw_gepardie_block": "Raw Gepardie block",
   "block.gepardiusmod.gepardie_ore": "Gepardie ore",
-  "block.gepardiusmod.deepslate_gepardie_ore": "Deepslate gepardie ore",
-  "block.gepardiusmod.endstone_gepardie_ore": "Endstone gepardie ore",
-  "block.gepardiusmod.netherrack_gepardie_ore": "Netherrack gepardie ore"
+  "block.gepardiusmod.deepslate_gepardie_ore": "Deepslate Gepardie ore",
+  "block.gepardiusmod.endstone_gepardie_ore": "Endstone Gepardie ore",
+  "block.gepardiusmod.netherrack_gepardie_ore": "Netherrack Gepardie ore",
+
+  "ItemGroup.geptab": "Gepardius Mod"
 }

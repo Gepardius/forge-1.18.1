@@ -1,6 +1,7 @@
 package net.gepardius.gepardiusmod.block;
 
 import net.gepardius.gepardiusmod.GepardiusMod;
+import net.gepardius.gepardiusmod.item.ModCreativeModeTab;
 import net.gepardius.gepardiusmod.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -21,35 +22,14 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GEPARDIE_BLOCK = registerBlock("gepardie_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
-                    .strength(8f)
-                    .requiresCorrectToolForDrops()), CreativeModeTab.TAB_MISC);
+                    .strength(10f)
+                    .requiresCorrectToolForDrops()), ModCreativeModeTab.GEP_TAB);
 
-    public static final RegistryObject<Block> RAW_GEPARDIE_BLOCK = registerBlock("raw_gepardie_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
-                    .strength(5f)
-                    .requiresCorrectToolForDrops()), CreativeModeTab.TAB_MISC);
 
     public static final RegistryObject<Block> GEPARDIE_ORE = registerBlock("gepardie_ore",
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
-                    .strength(6f)
-                    .requiresCorrectToolForDrops()), CreativeModeTab.TAB_MISC);
-
-    public static final RegistryObject<Block> DEEPSLATE_GEPARDIE_ORE = registerBlock("deepslate_gepardie_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
-                    .strength(6f)
-                    .requiresCorrectToolForDrops()), CreativeModeTab.TAB_MISC);
-
-    public static final RegistryObject<Block> ENDSTONE_GEPARDIE_ORE = registerBlock("endstone_gepardie_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
-                    .strength(6f)
-                    .requiresCorrectToolForDrops()), CreativeModeTab.TAB_MISC);
-
-    public static final RegistryObject<Block> NETHERRACK_GEPARDIE_ORE = registerBlock("netherrack_gepardie_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
-                    .strength(6f)
-                    .requiresCorrectToolForDrops()), CreativeModeTab.TAB_MISC);
-
-
+                    .strength(8f)
+                    .requiresCorrectToolForDrops()), ModCreativeModeTab.GEP_TAB);
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {

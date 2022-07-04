@@ -1,7 +1,7 @@
 package net.gepardius.gepardiusmod.item;
 
 import net.gepardius.gepardiusmod.GepardiusMod;
-import net.minecraft.world.item.CreativeModeTab;
+import net.gepardius.gepardiusmod.item.ModCreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -13,10 +13,7 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, GepardiusMod.MOD_ID);
 
     public static final RegistryObject<Item> GEPARDIE = ITEMS.register("gepardie",
-            () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
-
-    public static final RegistryObject<Item> RAW_GEPARDIE = ITEMS.register("raw_gepardie",
-            () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.GEP_TAB)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
