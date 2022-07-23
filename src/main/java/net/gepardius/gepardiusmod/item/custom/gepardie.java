@@ -12,12 +12,6 @@ import net.minecraft.world.level.block.Blocks;
 
 public class gepardie extends Item {
     public gepardie(Properties pProperties) {
-
         super(pProperties);
-    }
-
-    @Override
-    public InteractionResult useOn(UseOnContext pContext) {
-        return null;
     }
 }

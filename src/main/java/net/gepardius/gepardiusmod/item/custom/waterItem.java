@@ -27,7 +27,8 @@ public class waterItem extends Item {
         int dirZ = playerDirection.getStepZ();
         whichDirection(dirX, dirZ);
 
-        int nOfBlocks = 5;
+        int nOfBlocks = 15;
+
         if (!level.isClientSide){
             BlockPos positionClicked = pContext.getClickedPos();
 
