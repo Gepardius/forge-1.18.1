@@ -2,14 +2,16 @@ package net.gepardius.gepardiusmod.item.custom;
 
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 
 
-public class TeleportationItem extends Item {
-    public TeleportationItem(Properties pProperties) {
+public class deleteItem extends Item {
+    public deleteItem(Properties pProperties) {
 
         super(pProperties);
     }
@@ -18,6 +20,13 @@ public class TeleportationItem extends Item {
     public InteractionResult useOn(UseOnContext pContext) {
 
         Level level = pContext.getLevel();
+        Direction playerDirection = pContext.getPlayer().getDirection();
+        System.out.println(playerDirection);
+
+        int dirX = playerDirection.getStepX();
+        int dirZ = playerDirection.getStepZ();
+        whichDirection(dirX, dirZ);
+
         int nOfBlocks = 5;
         if (!level.isClientSide){
             BlockPos positionClicked = pContext.getClickedPos();
@@ -35,7 +44,8 @@ public class TeleportationItem extends Item {
                 for(int ii = 0; ii < nOfBlocks; ii++){
                     for(int iii = 0; iii < nOfBlocks; iii++){
                         blockToRemove = new BlockPos(x, y, z);
-                        level.removeBlock(blockToRemove, true);
+                        level.setBlock(blockToRemove, Blocks.AIR.defaultBlockState(), 1);
+                        // level.removeBlock(blockToRemove, true);
                         z += 1;
                         }
                     z = z_pos;
@@ -44,26 +54,6 @@ public class TeleportationItem extends Item {
                 y = y_pos;
                 x += 1;
             }
-
-            x = positionClicked.getX();
-            y = positionClicked.getY();
-            z = positionClicked.getZ();
-
-            blockToRemove = new BlockPos(x, y, z);
-            for(int i = 0; i < nOfBlocks; i++) {
-                for(int ii = 0; ii < nOfBlocks; ii++){
-                    for(int iii = 0; iii < nOfBlocks; iii++){
-                        blockToRemove = new BlockPos(x, y, z);
-                        level.removeBlock(blockToRemove, true);
-                        z -= 1;
-                    }
-                    z = z_pos;
-                    x -= 1;
-                }
-                x = x_pos;
-                y += 1;
-            }
-
             return super.useOn(pContext);
 
         } else {
@@ -83,7 +73,8 @@ public class TeleportationItem extends Item {
                 for(int ii = 0; ii < nOfBlocks; ii++){
                     for(int iii = 0; iii < nOfBlocks; iii++){
                         blockToRemove = new BlockPos(x, y, z);
-                        level.removeBlock(blockToRemove, true);
+                        level.setBlock(blockToRemove, Blocks.AIR.defaultBlockState(), 1);
+                        // level.removeBlock(blockToRemove, true);
                         z += 1;
                     }
                     z = z_pos;
@@ -92,26 +83,18 @@ public class TeleportationItem extends Item {
                 x = x_pos;
                 y += 1;
             }
-
-            x = positionClicked.getX();
-            y = positionClicked.getY();
-            z = positionClicked.getZ();
-
-            blockToRemove = new BlockPos(x, y, z);
-            for(int i = 0; i < nOfBlocks; i++) {
-                for(int ii = 0; ii < nOfBlocks; ii++){
-                    for(int iii = 0; iii < nOfBlocks; iii++){
-                        blockToRemove = new BlockPos(x, y, z);
-                        level.removeBlock(blockToRemove, true);
-                        z -= 1;
-                        }
-                    z = z_pos;
-                    x -= 1;
-                    }
-                x = x_pos;
-                y += 1;
-            }
             return super.useOn(pContext);
+        }
+    }
+    public void whichDirection(int directionX, int directionZ){
+        if (directionX == 0 && directionZ == -1){
+            System.out.println("NORTH");
+        } else if (directionX == 0 && directionZ == 1) {
+            System.out.println("SOUTH");
+        } else if (directionX == 1 && directionZ == 0) {
+            System.out.println("EAST");
+        } else if (directionX == -1 && directionZ == 0) {
+            System.out.println("WEST");
         }
     }
 }

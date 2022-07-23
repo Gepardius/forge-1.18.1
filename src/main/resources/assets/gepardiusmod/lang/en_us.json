@@ -1,5 +1,8 @@
 {
   "item.gepardiusmod.gepardie": "Gepardie",
+  "item.gepardiusmod.deleteitem": "Delete Item",
+  "item.gepardiusmod.stoneitem": "Stone Item",
+  "item.gepardiusmod.wateritem": "Water Item",
   "block.gepardiusmod.gepardie_block": "Gepardie block",
   "block.gepardiusmod.gepardie_ore": "Gepardie ore",
 
