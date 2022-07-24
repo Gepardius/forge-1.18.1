@@ -133,15 +133,4 @@ public class deleteItem extends Item {
             return super.useOn(pContext);
         }
     }
-    public void whichDirection(int directionX, int directionZ){
-        if (directionX == 0 && directionZ == -1){
-            System.out.println("NORTH");
-        } else if (directionX == 0 && directionZ == 1) {
-            System.out.println("SOUTH");
-        } else if (directionX == 1 && directionZ == 0) {
-            System.out.println("EAST");
-        } else if (directionX == -1 && directionZ == 0) {
-            System.out.println("WEST");
-        }
-    }
 }
