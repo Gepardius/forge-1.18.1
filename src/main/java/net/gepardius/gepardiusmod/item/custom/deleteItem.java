@@ -27,7 +27,9 @@ public class deleteItem extends Item {
         int dirZ = playerDirection.getStepZ();
         // whichDirection(dirX, dirZ);
 
-        int nOfBlocks = 15;
+        int nOfBlocksUp = 10;
+        int nOfBlocksAhead = 25;
+        int nOfBlocksSide = 5;
 
         BlockPos positionClicked = pContext.getClickedPos();
         double x = positionClicked.getX();
@@ -35,14 +37,24 @@ public class deleteItem extends Item {
         double z = positionClicked.getZ();
         y += 1;
 
+        if(dirX == 0 && dirZ == -1){ // NORTH
+            x += (nOfBlocksSide/2);
+        } else if (dirX == 0 && dirZ == 1) { // SOUTH
+            x -= (nOfBlocksSide/2);
+        } else if (dirX == 1 && dirZ == 0) { // WEST
+            z -= (nOfBlocksSide/2);
+        } else if (dirX == -1 && dirZ == 0) { // EAST
+            z += (nOfBlocksSide/2);
+        }
+
         if (!level.isClientSide){
 
             BlockPos blockToRemove = new BlockPos(x, y, z);
             level.setBlock(blockToRemove, Blocks.AIR.defaultBlockState(), 1);
 
-            for (int side = 0; side < nOfBlocks; side++){
-                for(int ahead = 0; ahead < nOfBlocks; ahead++){
-                    for(int up = 0; up < nOfBlocks; up++){
+            for (int side = 0; side < nOfBlocksSide; side++){
+                for(int ahead = 0; ahead < nOfBlocksAhead; ahead++){
+                    for(int up = 0; up < nOfBlocksUp; up++){
                         blockToRemove = new BlockPos(x, y, z);
                         level.setBlock(blockToRemove, Blocks.AIR.defaultBlockState(), 1);
 
@@ -63,6 +75,18 @@ public class deleteItem extends Item {
                     }
                     y += 1;
                 }
+                y = positionClicked.getY();
+
+                if(dirX == 0 && dirZ == -1){ // NORTH
+                    x -= 1;
+                } else if (dirX == 0 && dirZ == 1) { // SOUTH
+                    x += 1;
+                } else if (dirX == 1 && dirZ == 0) { // WEST
+                    z += 1;
+                } else if (dirX == -1 && dirZ == 0) { // EAST
+                    z -= 1;
+                }
+
             }
             return super.useOn(pContext);
         } else {
@@ -70,9 +94,9 @@ public class deleteItem extends Item {
             BlockPos blockToRemove = new BlockPos(x, y, z);
             level.setBlock(blockToRemove, Blocks.AIR.defaultBlockState(), 1);
 
-            for (int side = 0; side < nOfBlocks; side++){
-                for(int ahead = 0; ahead < nOfBlocks; ahead++){
-                    for(int up = 0; up < nOfBlocks; up++){
+            for (int side = 0; side < nOfBlocksSide; side++){
+                for(int ahead = 0; ahead < nOfBlocksAhead; ahead++){
+                    for(int up = 0; up < nOfBlocksUp; up++){
                         blockToRemove = new BlockPos(x, y, z);
                         level.setBlock(blockToRemove, Blocks.AIR.defaultBlockState(), 1);
 
@@ -93,6 +117,18 @@ public class deleteItem extends Item {
                     }
                     y += 1;
                 }
+                y = positionClicked.getY();
+
+                if(dirX == 0 && dirZ == -1){ // NORTH
+                    x -= 1;
+                } else if (dirX == 0 && dirZ == 1) { // SOUTH
+                    x += 1;
+                } else if (dirX == 1 && dirZ == 0) { // WEST
+                    z += 1;
+                } else if (dirX == -1 && dirZ == 0) { // EAST
+                    z -= 1;
+                }
+
             }
             return super.useOn(pContext);
         }
