@@ -53,8 +53,8 @@ public class stoneItem extends Item {
             level.setBlock(blockToRemove, Blocks.STONE.defaultBlockState(), 1);
 
             for (int side = 0; side < nOfBlocksSide; side++){
-                for(int ahead = 0; ahead < nOfBlocksAhead; ahead++){
-                    for(int up = 0; up < nOfBlocksUp; up++){
+                for(int up = 0; up < nOfBlocksUp; up++){
+                    for(int ahead = 0; ahead < nOfBlocksAhead; ahead++){
                         blockToRemove = new BlockPos(x, y, z);
                         level.setBlock(blockToRemove, Blocks.STONE.defaultBlockState(), 1);
 
@@ -76,6 +76,7 @@ public class stoneItem extends Item {
                     y += 1;
                 }
                 y = positionClicked.getY();
+                y += 1;
 
                 if(dirX == 0 && dirZ == -1){ // NORTH
                     x -= 1;
@@ -95,8 +96,8 @@ public class stoneItem extends Item {
             level.setBlock(blockToRemove, Blocks.STONE.defaultBlockState(), 1);
 
             for (int side = 0; side < nOfBlocksSide; side++){
-                for(int ahead = 0; ahead < nOfBlocksAhead; ahead++){
-                    for(int up = 0; up < nOfBlocksUp; up++){
+                for(int up = 0; up < nOfBlocksUp; up++){
+                    for(int ahead = 0; ahead < nOfBlocksAhead; ahead++){
                         blockToRemove = new BlockPos(x, y, z);
                         level.setBlock(blockToRemove, Blocks.STONE.defaultBlockState(), 1);
 
@@ -118,6 +119,7 @@ public class stoneItem extends Item {
                     y += 1;
                 }
                 y = positionClicked.getY();
+                y += 1;
 
                 if(dirX == 0 && dirZ == -1){ // NORTH
                     x -= 1;
