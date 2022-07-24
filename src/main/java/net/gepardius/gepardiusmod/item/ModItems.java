@@ -1,10 +1,7 @@
 package net.gepardius.gepardiusmod.item;
 
 import net.gepardius.gepardiusmod.GepardiusMod;
-import net.gepardius.gepardiusmod.item.custom.gepardie;
-import net.gepardius.gepardiusmod.item.custom.deleteItem;
-import net.gepardius.gepardiusmod.item.custom.stoneItem;
-import net.gepardius.gepardiusmod.item.custom.waterItem;
+import net.gepardius.gepardiusmod.item.custom.*;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -27,6 +24,17 @@ public class ModItems {
     public static final RegistryObject<Item> STONEITEM = ITEMS.register("stoneitem",
             () -> new stoneItem(new stoneItem.Properties().tab(ModCreativeModeTab.GEP_TAB)));
 
+    public static final RegistryObject<Item> ICEITEM = ITEMS.register("iceitem",
+            () -> new iceItem(new iceItem.Properties().tab(ModCreativeModeTab.GEP_TAB)));
+
+    public static final RegistryObject<Item> LAVAITEM = ITEMS.register("lavaitem",
+            () -> new lavaItem(new lavaItem.Properties().tab(ModCreativeModeTab.GEP_TAB)));
+
+    public static final RegistryObject<Item> FIREITEM = ITEMS.register("fireitem",
+            () -> new fireItem(new fireItem.Properties().tab(ModCreativeModeTab.GEP_TAB)));
+
+    public static final RegistryObject<Item> TELEPORTITEM = ITEMS.register("teleportitem",
+            () -> new teleportItem(new teleportItem.Properties().tab(ModCreativeModeTab.GEP_TAB)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

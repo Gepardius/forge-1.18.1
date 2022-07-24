@@ -25,17 +25,16 @@ public class deleteItem extends Item {
 
         int dirX = playerDirection.getStepX();
         int dirZ = playerDirection.getStepZ();
-        // whichDirection(dirX, dirZ);
 
-        int nOfBlocksUp = 10;
-        int nOfBlocksAhead = 25;
-        int nOfBlocksSide = 5;
+        int nOfBlocksUp = 5;
+        int nOfBlocksAhead = 75;
+        int nOfBlocksSide = 3;
 
         BlockPos positionClicked = pContext.getClickedPos();
         double x = positionClicked.getX();
         double y = positionClicked.getY();
         double z = positionClicked.getZ();
-        y += 1;
+        // y += 1;
 
         if(dirX == 0 && dirZ == -1){ // NORTH
             x += (nOfBlocksSide/2);
@@ -76,7 +75,7 @@ public class deleteItem extends Item {
                     y += 1;
                 }
                 y = positionClicked.getY();
-                y += 1;
+                // y += 1;
 
                 if(dirX == 0 && dirZ == -1){ // NORTH
                     x -= 1;
@@ -119,7 +118,7 @@ public class deleteItem extends Item {
                     y += 1;
                 }
                 y = positionClicked.getY();
-                y += 1;
+                // y += 1;
 
                 if(dirX == 0 && dirZ == -1){ // NORTH
                     x -= 1;

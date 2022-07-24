@@ -10,8 +10,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 
 
-public class stoneItem extends Item {
-    public stoneItem(Properties pProperties) {
+public class fireItem extends Item {
+    public fireItem(Properties pProperties) {
 
         super(pProperties);
     }
@@ -27,9 +27,9 @@ public class stoneItem extends Item {
         int dirZ = playerDirection.getStepZ();
         // whichDirection(dirX, dirZ);
 
-        int nOfBlocksUp = 5;
-        int nOfBlocksAhead = 2;
-        int nOfBlocksSide =5;
+        int nOfBlocksUp = 1;
+        int nOfBlocksAhead = 5;
+        int nOfBlocksSide = 5;
 
         BlockPos positionClicked = pContext.getClickedPos();
         double x = positionClicked.getX();
@@ -50,13 +50,13 @@ public class stoneItem extends Item {
         if (!level.isClientSide){
 
             BlockPos blockToRemove = new BlockPos(x, y, z);
-            level.setBlock(blockToRemove, Blocks.STONE.defaultBlockState(), 1);
+            level.setBlock(blockToRemove, Blocks.FIRE.defaultBlockState(), 1);
 
             for (int side = 0; side < nOfBlocksSide; side++){
                 for(int up = 0; up < nOfBlocksUp; up++){
                     for(int ahead = 0; ahead < nOfBlocksAhead; ahead++){
                         blockToRemove = new BlockPos(x, y, z);
-                        level.setBlock(blockToRemove, Blocks.STONE.defaultBlockState(), 1);
+                        level.setBlock(blockToRemove, Blocks.FIRE.defaultBlockState(), 1);
 
                         if(dirX == 0 && dirZ == -1){ // NORTH
                             z -= 1;
@@ -93,13 +93,13 @@ public class stoneItem extends Item {
         } else {
 
             BlockPos blockToRemove = new BlockPos(x, y, z);
-            level.setBlock(blockToRemove, Blocks.STONE.defaultBlockState(), 1);
+            level.setBlock(blockToRemove, Blocks.FIRE.defaultBlockState(), 1);
 
             for (int side = 0; side < nOfBlocksSide; side++){
                 for(int up = 0; up < nOfBlocksUp; up++){
                     for(int ahead = 0; ahead < nOfBlocksAhead; ahead++){
                         blockToRemove = new BlockPos(x, y, z);
-                        level.setBlock(blockToRemove, Blocks.STONE.defaultBlockState(), 1);
+                        level.setBlock(blockToRemove, Blocks.FIRE.defaultBlockState(), 1);
 
                         if(dirX == 0 && dirZ == -1){ // NORTH
                             z -= 1;
