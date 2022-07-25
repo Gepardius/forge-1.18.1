@@ -31,7 +31,6 @@ public class waterItem extends Item {
 
         Level level = pContext.getLevel();
         Direction playerDirection = pContext.getPlayer().getDirection();
-        System.out.println(playerDirection);
 
         int dirX = playerDirection.getStepX();
         int dirZ = playerDirection.getStepZ();
@@ -151,6 +150,8 @@ public class waterItem extends Item {
 
         // entity.pick(rayTraceDistance, 0.0F, false);
         Entity entity = Minecraft.getInstance().getCameraEntity();
+
+        rayTraceDistance = 200.D;
         HitResult viewedBlock = entity.pick(rayTraceDistance, 0.0F, false);
         Double x = viewedBlock.getLocation().x;
         Double y = viewedBlock.getLocation().y;
@@ -226,7 +227,6 @@ public class waterItem extends Item {
                 }
 
             }
-            return super.use(level, player, pUsedHand);
         } else {
             if ((viewedAndPlayerXDiff > 5 || viewedAndPlayerZDiff > 5)){
                 BlockPos blockToRemove = new BlockPos(x, y, z);
@@ -270,7 +270,8 @@ public class waterItem extends Item {
 
                 }
             }
-            return super.use(level, player, pUsedHand);
         }
+        rayTraceDistance = 20.0D;
+        return super.use(level, player, pUsedHand);
     }
 }

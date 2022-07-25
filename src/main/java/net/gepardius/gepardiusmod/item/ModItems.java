@@ -36,6 +36,9 @@ public class ModItems {
     public static final RegistryObject<Item> TELEPORTITEM = ITEMS.register("teleportitem",
             () -> new teleportItem(new teleportItem.Properties().tab(ModCreativeModeTab.GEP_TAB)));
 
+    public static final RegistryObject<Item> BOOSTITEM = ITEMS.register("boostitem",
+            () -> new boostItem(new boostItem.Properties().tab(ModCreativeModeTab.GEP_TAB)));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

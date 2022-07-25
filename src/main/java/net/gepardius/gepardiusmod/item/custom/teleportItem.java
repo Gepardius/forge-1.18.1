@@ -55,6 +55,9 @@ public class teleportItem extends Item {
 
         // entity.pick(rayTraceDistance, 0.0F, false);
         Entity entity = Minecraft.getInstance().getCameraEntity();
+
+        rayTraceDistance = 500.0D;
+
         HitResult viewedBlock = entity.pick(rayTraceDistance, 0.0F, false);
         Double x = viewedBlock.getLocation().x;
         Double y = viewedBlock.getLocation().y;
@@ -65,6 +68,9 @@ public class teleportItem extends Item {
         if (!pLevel.isClientSide){
             pPlayer.teleportTo(x, y, z);
         }
+
+        pPlayer.fallDistance = 0.0f;
+        rayTraceDistance = 20.0D;
 
         return super.use(pLevel, pPlayer, pUsedHand);
     }

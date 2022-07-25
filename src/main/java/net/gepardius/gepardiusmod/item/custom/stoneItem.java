@@ -7,14 +7,19 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
+
+import java.util.List;
 
 import static java.lang.Math.abs;
 import static net.minecraftforge.client.gui.ForgeIngameGui.rayTraceDistance;
@@ -37,9 +42,11 @@ public class stoneItem extends Item {
         int dirZ = playerDirection.getStepZ();
         // whichDirection(dirX, dirZ);
 
-        int nOfBlocksUp = 2;
-        int nOfBlocksAhead = 1;
-        int nOfBlocksSide =3;
+        int nOfBlocksUp = 4;
+        int nOfBlocksAhead = 4;
+        int nOfBlocksSide = 4;
+
+        float entityDamage = 50f;
 
         BlockPos positionClicked = pContext.getClickedPos();
         double x = positionClicked.getX();
@@ -47,17 +54,36 @@ public class stoneItem extends Item {
         double z = positionClicked.getZ();
         y += 1;
 
+        double xMax = x;
+        double zMax = z;
+        // y += 1;
+
         if(dirX == 0 && dirZ == -1){ // NORTH
             x += (nOfBlocksSide/2);
+            zMax = z - nOfBlocksAhead;
+            xMax = x - nOfBlocksSide;
         } else if (dirX == 0 && dirZ == 1) { // SOUTH
             x -= (nOfBlocksSide/2);
+            zMax = z + nOfBlocksAhead;
+            xMax = x + nOfBlocksSide;
         } else if (dirX == 1 && dirZ == 0) { // WEST
             z -= (nOfBlocksSide/2);
+            xMax = x + nOfBlocksAhead;
+            zMax = z + nOfBlocksSide;
         } else if (dirX == -1 && dirZ == 0) { // EAST
             z += (nOfBlocksSide/2);
+            xMax = x - nOfBlocksAhead;
+            zMax = z - nOfBlocksSide;
         }
 
         if (!level.isClientSide){
+
+            AABB minMax = new AABB(x, y, z, xMax, y+nOfBlocksUp, zMax);
+            Player player = pContext.getPlayer();
+            List<Entity> ent = level.getEntities(player, minMax);
+            for (Entity entko : ent) {
+                entko.hurt(DamageSource.IN_WALL, entityDamage);
+            }
 
             BlockPos blockToRemove = new BlockPos(x, y, z);
             level.setBlock(blockToRemove, Blocks.STONE.defaultBlockState(), 1);
@@ -101,6 +127,13 @@ public class stoneItem extends Item {
             }
             return super.useOn(pContext);
         } else {
+
+            AABB minMax = new AABB(x, y, z, xMax, y+nOfBlocksUp, zMax);
+            Player player = pContext.getPlayer();
+            List<Entity> ent = level.getEntities(player, minMax);
+            for (Entity entko : ent) {
+                entko.hurt(DamageSource.IN_WALL, entityDamage);
+            }
 
             BlockPos blockToRemove = new BlockPos(x, y, z);
             level.setBlock(blockToRemove, Blocks.STONE.defaultBlockState(), 1);
@@ -149,14 +182,12 @@ public class stoneItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand pUsedHand) {
 
-        // entity.pick(rayTraceDistance, 0.0F, false);
         Entity entity = Minecraft.getInstance().getCameraEntity();
+        rayTraceDistance = 200.0D;
         HitResult viewedBlock = entity.pick(rayTraceDistance, 0.0F, false);
         Double x = viewedBlock.getLocation().x;
         Double y = viewedBlock.getLocation().y;
         Double z = viewedBlock.getLocation().z;
-
-        // y += 1;
 
         Double playerX = player.position().x;
         Double playerZ = player.position().z;
@@ -165,7 +196,6 @@ public class stoneItem extends Item {
         Double viewedAndPlayerZDiff = abs(z - playerZ);
 
         Direction playerDirection = player.getDirection();
-        //System.out.println(playerDirection);
 
         int dirX = playerDirection.getStepX();
         int dirZ = playerDirection.getStepZ();
@@ -174,17 +204,37 @@ public class stoneItem extends Item {
         int nOfBlocksAhead = 3;
         int nOfBlocksSide = 3;
 
-        if (dirX == 0 && dirZ == -1) { // NORTH
-            x += (nOfBlocksSide / 2);
+        float entityDamage = 50f;
+
+        double xMax = x;
+        double zMax = z;
+        // y += 1;
+
+        if(dirX == 0 && dirZ == -1){ // NORTH
+            x += (nOfBlocksSide/2);
+            zMax = z - nOfBlocksAhead;
+            xMax = x - nOfBlocksSide;
         } else if (dirX == 0 && dirZ == 1) { // SOUTH
-            x -= (nOfBlocksSide / 2);
+            x -= (nOfBlocksSide/2);
+            zMax = z + nOfBlocksAhead;
+            xMax = x + nOfBlocksSide;
         } else if (dirX == 1 && dirZ == 0) { // WEST
-            z -= (nOfBlocksSide / 2);
+            z -= (nOfBlocksSide/2);
+            xMax = x + nOfBlocksAhead;
+            zMax = z + nOfBlocksSide;
         } else if (dirX == -1 && dirZ == 0) { // EAST
-            z += (nOfBlocksSide / 2);
+            z += (nOfBlocksSide/2);
+            xMax = x - nOfBlocksAhead;
+            zMax = z - nOfBlocksSide;
         }
 
         if (!level.isClientSide && (viewedAndPlayerXDiff > 5 || viewedAndPlayerZDiff > 5)) {
+
+            AABB minMax = new AABB(x, y, z, xMax, y+nOfBlocksUp, zMax);
+            List<Entity> ent = level.getEntities(player, minMax);
+            for (Entity entko : ent) {
+                entko.hurt(DamageSource.IN_WALL, entityDamage/2);
+            }
 
             BlockPos blockToRemove = new BlockPos(x, y, z);
             level.setBlock(blockToRemove, Blocks.STONE.defaultBlockState(), 1);
@@ -226,9 +276,15 @@ public class stoneItem extends Item {
                 }
 
             }
-            return super.use(level, player, pUsedHand);
         } else {
             if ((viewedAndPlayerXDiff > 5 || viewedAndPlayerZDiff > 5)){
+
+                AABB minMax = new AABB(x, y, z, xMax, y+nOfBlocksUp, zMax);
+                List<Entity> ent = level.getEntities(player, minMax);
+                for (Entity entko : ent) {
+                    entko.hurt(DamageSource.IN_WALL, entityDamage/2);
+                }
+
                 BlockPos blockToRemove = new BlockPos(x, y, z);
                 level.setBlock(blockToRemove, Blocks.STONE.defaultBlockState(), 1);
 
@@ -270,7 +326,8 @@ public class stoneItem extends Item {
 
                 }
             }
-            return super.use(level, player, pUsedHand);
         }
+        rayTraceDistance = 20.0D;
+        return super.use(level, player, pUsedHand);
     }
 }

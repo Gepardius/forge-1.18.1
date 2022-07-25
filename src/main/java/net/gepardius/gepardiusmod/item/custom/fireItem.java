@@ -7,6 +7,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -30,8 +32,8 @@ public class fireItem extends Item {
     public InteractionResult useOn(UseOnContext pContext) {
 
         Level level = pContext.getLevel();
+        Player player = pContext.getPlayer();
         Direction playerDirection = pContext.getPlayer().getDirection();
-        System.out.println(playerDirection);
 
         int dirX = playerDirection.getStepX();
         int dirZ = playerDirection.getStepZ();
@@ -67,6 +69,7 @@ public class fireItem extends Item {
                     for(int ahead = 0; ahead < nOfBlocksAhead; ahead++){
                         blockToRemove = new BlockPos(x, y, z);
                         level.setBlock(blockToRemove, Blocks.FIRE.defaultBlockState(), 1);
+                        // System.out.println(level.get);
 
                         if(dirX == 0 && dirZ == -1){ // NORTH
                             z -= 1;
@@ -142,6 +145,7 @@ public class fireItem extends Item {
                 }
 
             }
+            player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 1000, 5));
             return super.useOn(pContext);
         }
     }
@@ -151,6 +155,9 @@ public class fireItem extends Item {
 
         // entity.pick(rayTraceDistance, 0.0F, false);
         Entity entity = Minecraft.getInstance().getCameraEntity();
+
+        rayTraceDistance = 200.D;
+
         HitResult viewedBlock = entity.pick(rayTraceDistance, 0.0F, false);
         Double x = viewedBlock.getLocation().x;
         Double y = viewedBlock.getLocation().y;
@@ -226,7 +233,6 @@ public class fireItem extends Item {
                 }
 
             }
-            return super.use(level, player, pUsedHand);
         } else {
             if ((viewedAndPlayerXDiff > 5 || viewedAndPlayerZDiff > 5)){
                 BlockPos blockToRemove = new BlockPos(x, y, z);
@@ -270,7 +276,9 @@ public class fireItem extends Item {
 
                 }
             }
-            return super.use(level, player, pUsedHand);
         }
+        rayTraceDistance = 20.0D;
+        player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 1000, 5));
+        return super.use(level, player, pUsedHand);
     }
 }
