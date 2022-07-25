@@ -16,6 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.HitResult;
 
+import static java.lang.Math.abs;
 import static net.minecraftforge.client.gui.ForgeIngameGui.rayTraceDistance;
 
 
@@ -37,8 +38,8 @@ public class iceItem extends Item {
         // whichDirection(dirX, dirZ);
 
         int nOfBlocksUp = 2;
-        int nOfBlocksAhead = 2;
-        int nOfBlocksSide = 2;
+        int nOfBlocksAhead = 1;
+        int nOfBlocksSide = 3;
 
         BlockPos positionClicked = pContext.getClickedPos();
         double x = positionClicked.getX();
@@ -157,6 +158,12 @@ public class iceItem extends Item {
 
         // y += 1;
 
+        Double playerX = player.position().x;
+        Double playerZ = player.position().z;
+
+        Double viewedAndPlayerXDiff = abs(x - playerX);
+        Double viewedAndPlayerZDiff = abs(z - playerZ);
+
         Direction playerDirection = player.getDirection();
         //System.out.println(playerDirection);
 
@@ -177,7 +184,7 @@ public class iceItem extends Item {
             z += (nOfBlocksSide / 2);
         }
 
-        if (!level.isClientSide) {
+        if (!level.isClientSide && (viewedAndPlayerXDiff > 5 || viewedAndPlayerZDiff > 5)) {
 
             BlockPos blockToRemove = new BlockPos(x, y, z);
             level.setBlock(blockToRemove, Blocks.ICE.defaultBlockState(), 1);
@@ -221,46 +228,47 @@ public class iceItem extends Item {
             }
             return super.use(level, player, pUsedHand);
         } else {
+            if ((viewedAndPlayerXDiff > 5 || viewedAndPlayerZDiff > 5)){
+                BlockPos blockToRemove = new BlockPos(x, y, z);
+                level.setBlock(blockToRemove, Blocks.ICE.defaultBlockState(), 1);
 
-            BlockPos blockToRemove = new BlockPos(x, y, z);
-            level.setBlock(blockToRemove, Blocks.ICE.defaultBlockState(), 1);
+                for (int side = 0; side < nOfBlocksSide; side++) {
+                    for (int up = 0; up < nOfBlocksUp; up++) {
+                        for (int ahead = 0; ahead < nOfBlocksAhead; ahead++) {
+                            blockToRemove = new BlockPos(x, y, z);
+                            level.setBlock(blockToRemove, Blocks.ICE.defaultBlockState(), 1);
 
-            for (int side = 0; side < nOfBlocksSide; side++) {
-                for (int up = 0; up < nOfBlocksUp; up++) {
-                    for (int ahead = 0; ahead < nOfBlocksAhead; ahead++) {
-                        blockToRemove = new BlockPos(x, y, z);
-                        level.setBlock(blockToRemove, Blocks.ICE.defaultBlockState(), 1);
-
-                        if (dirX == 0 && dirZ == -1) { // NORTH
-                            z -= 1;
-                        } else if (dirX == 0 && dirZ == 1) { // SOUTH
-                            z += 1;
-                        } else if (dirX == 1 && dirZ == 0) { // WEST
-                            x += 1;
-                        } else if (dirX == -1 && dirZ == 0) { // EAST
-                            x -= 1;
+                            if (dirX == 0 && dirZ == -1) { // NORTH
+                                z -= 1;
+                            } else if (dirX == 0 && dirZ == 1) { // SOUTH
+                                z += 1;
+                            } else if (dirX == 1 && dirZ == 0) { // WEST
+                                x += 1;
+                            } else if (dirX == -1 && dirZ == 0) { // EAST
+                                x -= 1;
+                            }
                         }
+                        if (dirX == 0) {
+                            z = viewedBlock.getLocation().z;
+                        } else {
+                            x = viewedBlock.getLocation().x;
+                        }
+                        y += 1;
                     }
-                    if (dirX == 0) {
-                        z = viewedBlock.getLocation().z;
-                    } else {
-                        x = viewedBlock.getLocation().x;
+                    y = viewedBlock.getLocation().y;
+                    // y += 1;
+
+                    if (dirX == 0 && dirZ == -1) { // NORTH
+                        x -= 1;
+                    } else if (dirX == 0 && dirZ == 1) { // SOUTH
+                        x += 1;
+                    } else if (dirX == 1 && dirZ == 0) { // WEST
+                        z += 1;
+                    } else if (dirX == -1 && dirZ == 0) { // EAST
+                        z -= 1;
                     }
-                    y += 1;
-                }
-                y = viewedBlock.getLocation().y;
-                // y += 1;
 
-                if (dirX == 0 && dirZ == -1) { // NORTH
-                    x -= 1;
-                } else if (dirX == 0 && dirZ == 1) { // SOUTH
-                    x += 1;
-                } else if (dirX == 1 && dirZ == 0) { // WEST
-                    z += 1;
-                } else if (dirX == -1 && dirZ == 0) { // EAST
-                    z -= 1;
                 }
-
             }
             return super.use(level, player, pUsedHand);
         }
