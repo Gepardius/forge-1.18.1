@@ -26,6 +26,7 @@ public class boostItem extends Item {
             pPlayer.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 10000, 5));
             pPlayer.addEffect(new MobEffectInstance(MobEffects.JUMP, 1000, 10));
             pPlayer.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1000, 5));
+            pPlayer.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 1000, 5));
         }
         return super.use(pLevel, pPlayer, pUsedHand);
     }
