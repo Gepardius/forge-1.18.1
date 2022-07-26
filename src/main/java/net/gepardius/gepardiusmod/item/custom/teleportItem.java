@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.TargetBlock;
@@ -28,37 +29,16 @@ public class teleportItem extends Item {
         super(pProperties);
     }
 
-    /*@Override
-    public InteractionResult useOn(UseOnContext pContext) {
-
-        Level level = pContext.getLevel();
-        Player player = pContext.getPlayer();
-        Entity entity = Minecraft.getInstance().getCameraEntity();
-
-
-        BlockPos positionClicked = pContext.getClickedPos();
-        double x = positionClicked.getX();
-        double y = positionClicked.getY();
-        double z = positionClicked.getZ();
-
-        y += 1;
-
-        if (!level.isClientSide){
-            player.teleportTo(x, y, z);
-            System.out.println(entity.pick(rayTraceDistance, 0.0F, true));
-        }
-        return super.useOn(pContext);
-    }*/
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
 
         // entity.pick(rayTraceDistance, 0.0F, false);
-        Entity entity = Minecraft.getInstance().getCameraEntity();
+        // Entity entity = Minecraft.getInstance().getCameraEntity();
 
         rayTraceDistance = 500.0D;
 
-        HitResult viewedBlock = entity.pick(rayTraceDistance, 0.0F, false);
+        HitResult viewedBlock = pPlayer.pick(rayTraceDistance, 0.0F, false);
         Double x = viewedBlock.getLocation().x;
         Double y = viewedBlock.getLocation().y;
         Double z = viewedBlock.getLocation().z;

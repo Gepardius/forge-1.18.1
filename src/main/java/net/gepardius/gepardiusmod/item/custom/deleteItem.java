@@ -18,6 +18,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class deleteItem extends Item {
         int nOfBlocksAhead = 50;
         int nOfBlocksSide = 30;
 
-        float entityDamage = 1000f;
+        float entityDamage = 0f;
 
         BlockPos positionClicked = pContext.getClickedPos();
         double x = positionClicked.getX();
@@ -76,10 +77,12 @@ public class deleteItem extends Item {
         if (!level.isClientSide){
 
             AABB minMax = new AABB(x, y, z, xMax, y+nOfBlocksUp, zMax);
+
             Player player = pContext.getPlayer();
             List<Entity> ent = level.getEntities(player, minMax);
             for (Entity entko : ent) {
-                entko.hurt(DamageSource.IN_WALL, entityDamage);
+                entko.moveTo(xMax, y, zMax);
+                entko.hurt(DamageSource.FLY_INTO_WALL, entityDamage);
             }
 
             BlockPos blockToRemove = new BlockPos(x, y, z);
@@ -129,7 +132,8 @@ public class deleteItem extends Item {
             Player player = pContext.getPlayer();
             List<Entity> ent = level.getEntities(player, minMax);
             for (Entity entko : ent) {
-                entko.hurt(DamageSource.IN_WALL, entityDamage);
+                entko.moveTo(xMax, y, zMax);
+                entko.hurt(DamageSource.FLY_INTO_WALL, entityDamage);
             }
 
             BlockPos blockToRemove = new BlockPos(x, y, z);
@@ -180,11 +184,11 @@ public class deleteItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand pUsedHand) {
 
         // entity.pick(rayTraceDistance, 0.0F, false);
-        Entity entity = Minecraft.getInstance().getCameraEntity();
+        // Entity entity = Minecraft.getInstance().getCameraEntity();
 
         rayTraceDistance = 500.D;
 
-        HitResult viewedBlock = entity.pick(rayTraceDistance, 0.0F, false);
+        HitResult viewedBlock = player.pick(rayTraceDistance, 0.0F, false);
         Double x = viewedBlock.getLocation().x;
         Double y = viewedBlock.getLocation().y;
         Double z = viewedBlock.getLocation().z;
@@ -235,7 +239,7 @@ public class deleteItem extends Item {
             AABB minMax = new AABB(x, y, z, xMax, y+nOfBlocksUp, zMax);
             List<Entity> ent = level.getEntities(player, minMax);
             for (Entity entko : ent) {
-                entko.hurt(DamageSource.IN_WALL, entityDamage/2);
+                entko.hurt(DamageSource.FLY_INTO_WALL, entityDamage/2);
             }
 
             BlockPos blockToRemove = new BlockPos(x, y, z);
@@ -284,7 +288,7 @@ public class deleteItem extends Item {
                 AABB minMax = new AABB(x, y, z, xMax, y+nOfBlocksUp, zMax);
                 List<Entity> ent = level.getEntities(player, minMax);
                 for (Entity entko : ent) {
-                    entko.hurt(DamageSource.IN_WALL, entityDamage/2);
+                    entko.hurt(DamageSource.FLY_INTO_WALL, entityDamage/2);
                 }
 
                 BlockPos blockToRemove = new BlockPos(x, y, z);

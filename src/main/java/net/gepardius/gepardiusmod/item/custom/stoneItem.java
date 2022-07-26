@@ -182,9 +182,11 @@ public class stoneItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand pUsedHand) {
 
-        Entity entity = Minecraft.getInstance().getCameraEntity();
+        // Entity entity = Minecraft.getInstance().getCameraEntity();
+
         rayTraceDistance = 200.0D;
-        HitResult viewedBlock = entity.pick(rayTraceDistance, 0.0F, false);
+
+        HitResult viewedBlock = player.pick(rayTraceDistance, 0.0F, false);
         Double x = viewedBlock.getLocation().x;
         Double y = viewedBlock.getLocation().y;
         Double z = viewedBlock.getLocation().z;

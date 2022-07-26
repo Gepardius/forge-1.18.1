@@ -154,11 +154,11 @@ public class fireItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand pUsedHand) {
 
         // entity.pick(rayTraceDistance, 0.0F, false);
-        Entity entity = Minecraft.getInstance().getCameraEntity();
+        // Entity entity = Minecraft.getInstance().getCameraEntity();
 
         rayTraceDistance = 200.D;
 
-        HitResult viewedBlock = entity.pick(rayTraceDistance, 0.0F, false);
+        HitResult viewedBlock = player.pick(rayTraceDistance, 0.0F, false);
         Double x = viewedBlock.getLocation().x;
         Double y = viewedBlock.getLocation().y;
         Double z = viewedBlock.getLocation().z;

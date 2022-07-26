@@ -17,6 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
@@ -81,7 +82,6 @@ public class iceItem extends Item {
             Player player = pContext.getPlayer();
             List<Entity> ent = level.getEntities(player, minMax);
             for (Entity entko : ent) {
-                entko.setDeltaMovement(0, entko.getDeltaMovement().y(), 0);
                 entko.hurt(DamageSource.IN_WALL, entityDamage);
             }
 
@@ -132,7 +132,6 @@ public class iceItem extends Item {
             Player player = pContext.getPlayer();
             List<Entity> ent = level.getEntities(player, minMax);
             for (Entity entko : ent) {
-                entko.setDeltaMovement(0, entko.getDeltaMovement().y(), 0);
                 entko.hurt(DamageSource.IN_WALL, entityDamage);
             }
 
@@ -183,9 +182,11 @@ public class iceItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand pUsedHand) {
 
-        Entity entity = Minecraft.getInstance().getCameraEntity();
+        // Entity entity = Minecraft.getInstance().getCameraEntity();
+
         rayTraceDistance = 200.0D;
-        HitResult viewedBlock = entity.pick(rayTraceDistance, 0.0F, false);
+
+        HitResult viewedBlock = player.pick(rayTraceDistance, 0.0F, false);
         Double x = viewedBlock.getLocation().x;
         Double y = viewedBlock.getLocation().y;
         Double z = viewedBlock.getLocation().z;
@@ -233,7 +234,10 @@ public class iceItem extends Item {
 
             AABB minMax = new AABB(x, y, z, xMax, y+nOfBlocksUp, zMax);
             List<Entity> ent = level.getEntities(player, minMax);
+            Vec3 ZERO = new Vec3(0.0D, 0.0D, 0.0D);
             for (Entity entko : ent) {
+                // entko.makeStuckInBlock(entko.getFeetBlockState(), ZERO);
+                // entko.setTicksFrozen(100);
                 entko.hurt(DamageSource.IN_WALL, entityDamage/2);
             }
 
@@ -282,7 +286,10 @@ public class iceItem extends Item {
 
                 AABB minMax = new AABB(x, y, z, xMax, y+nOfBlocksUp, zMax);
                 List<Entity> ent = level.getEntities(player, minMax);
+                Vec3 ZERO = new Vec3(0.0D, 0.0D, 0.0D);
                 for (Entity entko : ent) {
+                    // entko.makeStuckInBlock(entko.getFeetBlockState(), ZERO);
+                    // entko.setTicksFrozen(100);
                     entko.hurt(DamageSource.IN_WALL, entityDamage/2);
                 }
 
