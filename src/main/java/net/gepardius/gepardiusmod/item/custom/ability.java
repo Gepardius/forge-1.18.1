@@ -8,21 +8,16 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
-
 import java.util.List;
-
 import static java.lang.Math.abs;
-import static net.minecraftforge.client.gui.ForgeIngameGui.rayTraceDistance;
 
 public class ability {
 
 
-    public static void abilityUse(UseOnContext pContext, int nOfBlocksUp, int nOfBlocksAhead, int nOfBlocksSide, float entityDamage, DamageSource damageSource, BlockState deafultBlockState) {
+    public static void abilityUse(UseOnContext pContext, int nOfBlocksUp, int nOfBlocksAhead, int nOfBlocksSide, float entityDamage, DamageSource damageSource, BlockState defaultBlockState) {
 
         Level level = pContext.getLevel();
         Direction playerDirection = pContext.getPlayer().getDirection();
@@ -69,13 +64,13 @@ public class ability {
             }
 
             BlockPos blockToRemove = new BlockPos(x, y, z);
-            level.setBlock(blockToRemove, deafultBlockState, 1);
+            level.setBlock(blockToRemove, defaultBlockState, 1);
 
             for (int side = 0; side < nOfBlocksSide; side++){
                 for(int up = 0; up < nOfBlocksUp; up++){
                     for(int ahead = 0; ahead < nOfBlocksAhead; ahead++){
                         blockToRemove = new BlockPos(x, y, z);
-                        level.setBlock(blockToRemove, deafultBlockState, 1);
+                        level.setBlock(blockToRemove, defaultBlockState, 1);
 
                         if(dirX == 0 && dirZ == -1){ // NORTH
                             z -= 1;
@@ -119,13 +114,13 @@ public class ability {
             }
 
             BlockPos blockToRemove = new BlockPos(x, y, z);
-            level.setBlock(blockToRemove, deafultBlockState, 1);
+            level.setBlock(blockToRemove, defaultBlockState, 1);
 
             for (int side = 0; side < nOfBlocksSide; side++){
                 for(int up = 0; up < nOfBlocksUp; up++){
                     for(int ahead = 0; ahead < nOfBlocksAhead; ahead++){
                         blockToRemove = new BlockPos(x, y, z);
-                        level.setBlock(blockToRemove, deafultBlockState, 1);
+                        level.setBlock(blockToRemove, defaultBlockState, 1);
 
                         if(dirX == 0 && dirZ == -1){ // NORTH
                             z -= 1;
@@ -161,7 +156,7 @@ public class ability {
         }
     }
 
-    public static void  abilityFarUse(Level level, Player player, InteractionHand hand, int nOfBlocksUp, int nOfBlocksAhead, int nOfBlocksSide, float entityDamage, DamageSource damageSource, BlockState deafultBlockState) {
+    public static void  abilityFarUse(Level level, Player player, InteractionHand hand, int nOfBlocksUp, int nOfBlocksAhead, int nOfBlocksSide, float entityDamage, DamageSource damageSource, BlockState defaultBlockState) {
 
         Double distance = 500.0D;
 
@@ -212,13 +207,13 @@ public class ability {
             }
 
             BlockPos blockToRemove = new BlockPos(x, y, z);
-            level.setBlock(blockToRemove, deafultBlockState, 1);
+            level.setBlock(blockToRemove, defaultBlockState, 1);
 
             for (int side = 0; side < nOfBlocksSide; side++) {
                 for (int up = 0; up < nOfBlocksUp; up++) {
                     for (int ahead = 0; ahead < nOfBlocksAhead; ahead++) {
                         blockToRemove = new BlockPos(x, y, z);
-                        level.setBlock(blockToRemove, deafultBlockState, 1);
+                        level.setBlock(blockToRemove, defaultBlockState, 1);
 
                         if (dirX == 0 && dirZ == -1) { // NORTH
                             z -= 1;
@@ -261,13 +256,13 @@ public class ability {
                 }
 
                 BlockPos blockToRemove = new BlockPos(x, y, z);
-                level.setBlock(blockToRemove, deafultBlockState, 1);
+                level.setBlock(blockToRemove, defaultBlockState, 1);
 
                 for (int side = 0; side < nOfBlocksSide; side++) {
                     for (int up = 0; up < nOfBlocksUp; up++) {
                         for (int ahead = 0; ahead < nOfBlocksAhead; ahead++) {
                             blockToRemove = new BlockPos(x, y, z);
-                            level.setBlock(blockToRemove, deafultBlockState, 1);
+                            level.setBlock(blockToRemove, defaultBlockState, 1);
 
                             if (dirX == 0 && dirZ == -1) { // NORTH
                                 z -= 1;
