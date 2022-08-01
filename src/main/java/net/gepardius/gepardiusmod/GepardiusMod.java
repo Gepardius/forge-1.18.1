@@ -2,6 +2,7 @@ package net.gepardius.gepardiusmod;
 
 import net.gepardius.gepardiusmod.block.ModBlocks;
 import net.gepardius.gepardiusmod.item.ModItems;
+// import net.gepardius.gepardiusmod.keybinds.Keybinds;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -31,11 +32,12 @@ public class GepardiusMod {
         // Register the setup method for modloading
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-
         // registering mod items into our register
         ModItems.register(eventBus);
         // registering mod blocks into our register
         ModBlocks.register(eventBus);
+
+        // Keybinds.init();
 
         eventBus.addListener(this::setup);
 
